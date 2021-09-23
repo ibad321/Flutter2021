@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_3/pages/Day5.dart';
+import 'package:flutter_application_3/pages/day6.dart';
+import 'package:flutter_application_3/pages/login_page.dart';
 import 'package:flutter_application_3/pages/tiktok_ui.dart';
 // import 'package:flutter_application_3/pages/Signup_page.dart';
 // import 'package:flutter_application_3/pages/day4.dart';
@@ -22,7 +24,8 @@ class MyApp extends StatelessWidget {
       // home: Day4(),
       // home: Signup(),
       // home: Day5(),
-      home: Tiktokui(),
+      // home: Tiktokui(),
+      home: MyStateFullWidget(),
 
     );
   }
