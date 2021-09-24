@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_3/pages/Day5.dart';
+import 'package:flutter_application_3/pages/Signup_page.dart';
 import 'package:flutter_application_3/pages/day6.dart';
+import 'package:flutter_application_3/pages/day7.dart';
+import 'package:flutter_application_3/pages/homepage.dart';
 import 'package:flutter_application_3/pages/login_page.dart';
 import 'package:flutter_application_3/pages/tiktok_ui.dart';
 // import 'package:flutter_application_3/pages/Signup_page.dart';
@@ -16,6 +19,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      themeMode: ThemeMode.dark,
+      darkTheme: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.yellow
+
+      ),
+      initialRoute: "/",
+      routes: {
+        "/": (context)=> Day7(),
+        "/signup" : (context) => Signup(),
+        "/day7" :(context) => Day7(),
+      },
       title: "Flutter course",
       // home: HomePage(),
       // home: ImagePage(),
@@ -25,7 +43,7 @@ class MyApp extends StatelessWidget {
       // home: Signup(),
       // home: Day5(),
       // home: Tiktokui(),
-      home: MyStateFullWidget(),
+      // home: MyStateFullWidget(),
 
     );
   }
