@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_3/pages/Day5.dart';
+// import 'package:flutter_application_3/pages/Day5.dart';
 import 'package:flutter_application_3/pages/Signup_page.dart';
-import 'package:flutter_application_3/pages/day6.dart';
 import 'package:flutter_application_3/pages/day7.dart';
+import 'package:flutter_application_3/pages/day8.dart';
 import 'package:flutter_application_3/pages/homepage.dart';
+// import 'package:flutter_application_3/pages/Signup_page.dart';
+// import 'package:flutter_application_3/pages/day6.dart';
+// import 'package:flutter_application_3/pages/day7.dart';
+// import 'package:flutter_application_3/pages/homepage.dart';
 import 'package:flutter_application_3/pages/login_page.dart';
-import 'package:flutter_application_3/pages/tiktok_ui.dart';
+import 'package:flutter_application_3/pages/ongeneratedroutes.dart';
+// import 'package:flutter_application_3/pages/tiktok_ui.dart';
 // import 'package:flutter_application_3/pages/Signup_page.dart';
 // import 'package:flutter_application_3/pages/day4.dart';
 // import 'package:flutter_application_3/pages/login_page.dart';
@@ -23,28 +28,22 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       themeMode: ThemeMode.dark,
-      darkTheme: ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.yellow
-
-      ),
+      darkTheme:
+          ThemeData(brightness: Brightness.light, primarySwatch: Colors.yellow),
       initialRoute: "/",
-      routes: {
-        "/": (context)=> Day7(),
-        "/signup" : (context) => Signup(),
-        "/day7" :(context) => Day7(),
-      },
-      title: "Flutter course",
-      // home: HomePage(),
-      // home: ImagePage(),
-      // home: Rwcolmn(),
-      // home: Loginpage(),
-      // home: Day4(),
-      // home: Signup(),
-      // home: Day5(),
-      // home: Tiktokui(),
-      // home: MyStateFullWidget(),
+      // routes: {
+      //   "/": (context)=> Day8(),
+      //   "/signup" : (context) => Signup(),
+      //   "/day7" :(context) => Day7(),
+      //   "/login":(context) => Loginpage(),
+      //   "/day8":(context) => Day8(),
 
+      // 
+  
+      onGenerateRoute: OnGenerateRoute.route,
+     
+      // home: MyStateFullWidget(),
     );
   }
+
 }
