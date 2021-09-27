@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_application_3/pages/Day5.dart';
+import 'package:flutter_application_3/counter.dart';
 import 'package:flutter_application_3/pages/Signup_page.dart';
+import 'package:flutter_application_3/pages/day6.dart';
 import 'package:flutter_application_3/pages/day7.dart';
 import 'package:flutter_application_3/pages/day8.dart';
-import 'package:flutter_application_3/pages/homepage.dart';
+import 'package:flutter_application_3/pages/login_page.dart';
+
+// import 'package:flutter_application_3/pages/Day5.dart';
+// import 'package:flutter_application_3/pages/day8.dart';
 // import 'package:flutter_application_3/pages/Signup_page.dart';
 // import 'package:flutter_application_3/pages/day6.dart';
 // import 'package:flutter_application_3/pages/day7.dart';
 // import 'package:flutter_application_3/pages/homepage.dart';
-import 'package:flutter_application_3/pages/login_page.dart';
 import 'package:flutter_application_3/pages/ongeneratedroutes.dart';
+import 'package:flutter_application_3/pages/tiktok_ui.dart';
+// import 'package:flutter_application_3/pages/ongeneratedroutes.dart';
 // import 'package:flutter_application_3/pages/tiktok_ui.dart';
 // import 'package:flutter_application_3/pages/Signup_page.dart';
 // import 'package:flutter_application_3/pages/day4.dart';
@@ -32,18 +37,29 @@ class MyApp extends StatelessWidget {
           ThemeData(brightness: Brightness.light, primarySwatch: Colors.yellow),
       initialRoute: "/",
       // routes: {
-      //   "/": (context)=> Day8(),
+      //   "/": (context)=> Tikk(),
       //   "/signup" : (context) => Signup(),
       //   "/day7" :(context) => Day7(),
       //   "/login":(context) => Loginpage(),
       //   "/day8":(context) => Day8(),
-
-      // 
+      //   "/day7":(context)=> Day7(),
+      //   "/Stefull": (context) => MyStateFullWidget(),
+      //   "/counter" :(context)=> Counter(),
+      //   "/TictokUi" :(context) => Tiktokui(),
+      //   "/tiktok": (context)=>Tikk(),
+       
+        
+    
+      // },
+      // );
+  
+     
   
       onGenerateRoute: OnGenerateRoute.route,
      
       // home: MyStateFullWidget(),
-    );
+       );
+       
   }
 
 }
