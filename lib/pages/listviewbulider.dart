@@ -14,7 +14,7 @@ class Listviewbuilder extends StatelessWidget {
       body: ListView.separated(
           scrollDirection: Axis.vertical,
           itemCount: Data.length,
-          separatorBuilder: (context,index){
+          separatorBuilder: (context, index) {
             return Container(
               decoration: BoxDecoration(color: Colors.grey.withOpacity(.4)),
               child: Text("separated Builder"),

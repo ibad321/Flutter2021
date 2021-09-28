@@ -10,18 +10,17 @@ class Pagevew extends StatelessWidget {
       appBar: AppBar(
         title: Text("Page view bUilder"),
       ),
-    body: PageView.builder(
-      itemCount:ListEntity.listData.length,
-      itemBuilder: (context,index){
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.grey,
-          ),
-          child: Center(child: Text("Page View ${ListEntity.listData[index].title}")),
-        );
-      }
-    ),
-      
+      body: PageView.builder(
+          itemCount: ListEntity.listData.length,
+          itemBuilder: (context, index) {
+            return Container(
+              decoration: BoxDecoration(
+                color: Colors.grey,
+              ),
+              child: Center(
+                  child: Text("Page View ${ListEntity.listData[index].title}")),
+            );
+          }),
     );
   }
 }
