@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'day8.dart';
+
+
 class HomePage extends StatelessWidget {
-   final UserData userdata;
+ final UserData userData;
 
-  const HomePage({ required this.userdata});
+  const HomePage({this.userData});
 
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +28,7 @@ class HomePage extends StatelessWidget {
                 topRight: Radius.circular(50),
               )),
           child: Text(
-            "username:${userdata.username},userId ${userdata.userId}",
+            "username:${userData.username},userId ${userData.userId}",
             style: TextStyle(
                 fontSize: 20,
                 color: Colors.white,
@@ -42,4 +43,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-

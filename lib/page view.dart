@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_3/pages/domain/entity.dart';
 
 class Pagevew extends StatelessWidget {
-  const Pagevew({Key? key}) : super(key: key);
+ 
 
   @override
   Widget build(BuildContext context) {

@@ -7,9 +7,9 @@ class AnimatedWidgetExample extends StatefulWidget {
 }
 
 class _AnimatedWidgetExampleState extends State<AnimatedWidgetExample> with SingleTickerProviderStateMixin {
-  late Animation<double> _animation;
+   Animation<double> _animation;
 
-  late AnimationController _animationController;
+   AnimationController _animationController;
 
 
   @override
@@ -49,7 +49,7 @@ class _AnimatedWidgetExampleState extends State<AnimatedWidgetExample> with Sing
 class ImageAnimatedWidget extends AnimatedWidget{
   final Animation<double> animation;
 
-  ImageAnimatedWidget({required this.animation}):super(listenable: animation);
+  ImageAnimatedWidget({ this.animation}):super(listenable: animation);
 
   @override
   Widget build(BuildContext context) {

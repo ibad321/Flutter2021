@@ -10,9 +10,9 @@ class SimpleAnim extends StatefulWidget {
 
 class _SimpleAnimState extends State<SimpleAnim>
     with SingleTickerProviderStateMixin {
-  late Animation<double> _animation;
+   Animation<double> _animation;
 
-  late AnimationController _animationController;
+   AnimationController _animationController;
 
   @override
   void initState() {

@@ -2,7 +2,7 @@ class ListEntity{
   final String image;
   final String title;
 
-  ListEntity({required this.image, required this.title});
+  ListEntity({ this.image,  this.title});
 
 
   static List<ListEntity> listData=[
