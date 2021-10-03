@@ -17,9 +17,7 @@ class Pageview2 extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.grey,
         ),
-          child: Center(child: Text("$index")),
-
-        );
+      child: Text("$index"));
       },
       ),
     );

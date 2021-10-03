@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_3/listview2.dart';
 import 'package:flutter_application_3/pages/Signup_page.dart';
+import 'package:flutter_application_3/pages/Youtube%20search/youtubesearchpage.dart';
 
 
 import 'Drawer/AnimatedDrawer.dart';
@@ -16,7 +17,7 @@ class OnGenerateRoute{
 
     if (settings.name=="/"){
       return MaterialPageRoute(
-          builder: (_) => AnimatedDrwer()
+          builder: (_) => YoutubeSearchpage()
       );
     }else if (settings.name=="/signup"){
       return MaterialPageRoute(

@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.dark,
       darkTheme:
-          ThemeData(brightness: Brightness.light, primarySwatch: Colors.yellow),
+          ThemeData(brightness: Brightness.light, primarySwatch: Colors.red),
       initialRoute: "/",
       // routes: {
       //   "/": (context)=> Tikk(),
