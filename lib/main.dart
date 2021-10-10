@@ -47,19 +47,13 @@ class MyApp extends StatelessWidget {
       //   "/counter" :(context)=> Counter(),
       //   "/TictokUi" :(context) => Tiktokui(),
       //   "/tiktok": (context)=>Tikk(),
-       
-        
-    
+
       // },
       // );
-  
-     
-  
-      onGenerateRoute: OnGenerateRoute.route,
-     
-      // home: MyStateFullWidget(),
-       );
-       
-  }
 
+      onGenerateRoute: OnGenerateRoute.route,
+
+      // home: MyStateFullWidget(),
+    );
+  }
 }
