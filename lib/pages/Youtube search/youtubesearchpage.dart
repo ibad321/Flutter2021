@@ -15,57 +15,88 @@ class YoutubeSearchPage extends StatefulWidget {
 
 class _YoutubeSearchPageState extends State<YoutubeSearchPage> {
   bool _isSearch = false;
-  bool _isLoading=true;
+  bool _isLoading = true;
   int navIndex = 0;
-  List<ItemData> items=[];
+  List<ItemData> items = [];
+  String _NextPagetoken;
+  ScrollController _listscrollController = ScrollController();
 
-  TextEditingController _controller=TextEditingController();
+  TextEditingController _controller = TextEditingController();
 
-  String baseUrl="https://youtube.googleapis.com/youtube/v3/";
-  String APK_KEY="AIzaSyBjGloNHkJq0fXNS9gCa-kQJhZWjffaMUY";
-  static const String MAXRESULT="10";
+  String baseUrl = "https://youtube.googleapis.com/youtube/v3/";
+  String APK_KEY = "AIzaSyBjGloNHkJq0fXNS9gCa-kQJhZWjffaMUY";
+  static const String MAXRESULT = "10";
 
-  final httpClient=http.Client();
+  final httpClient = http.Client();
 
   @override
   void dispose() {
     _controller.dispose();
+    _listscrollController.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    _loadMockDataFromAssets();
+    getresult();
   }
 
-
-  Future<void> _loadMockDataFromAssets()async{
-    String url=baseUrl+"search?part=snippet&maxResults=$MAXRESULT&q=${_controller.text}&videoType=any&key=$APK_KEY";
-
-    final encodeFul=Uri.encodeFull(url);
-
-    final response=await httpClient.get(encodeFul);
+  Future<void> getresult() async {
     setState(() {
-      _isLoading=false;
+      _isLoading = true;
     });
 
-    if (response.statusCode==200){
-      final data=YoutubeSearchmodel.fromJson(json.decode(response.body));
-      items=data.items;
+    String url = baseUrl +
+        "search?part=snippet&maxResults=$MAXRESULT&q=${_controller.text}&videoType=any&key=$APK_KEY" +
+        (_NextPagetoken != null ? "&pageToken=$_NextPagetoken" : "");
+
+    final encodeFul = Uri.encodeFull(url);
+
+    final response = await httpClient.get(encodeFul);
+
+    if (response.statusCode == 200) {
+      final data = YoutubeSearchmodel.fromJson(json.decode(response.body));
+      setState(() {
+        _NextPagetoken = data.nextPageToken;
+        items = data.items;
+        _isLoading = false;
+      });
     }
-
-
 
     // final assetsData=await rootBundle.loadString("assets/youtube_search.json");
     //
     // final response=YoutubeSearchModel.fromJson(json.decode(assetsData));
 
-
-
-   // print(response.items[0].snippet.thumbnails.high.url);
+    // print(response.items[0].snippet.thumbnails.high.url);
   }
 
+  Future<void> nextpageResult() async {
+    if (_NextPagetoken == null) {
+      //TODO:handle exception
+      return;
+    }
+    if (_controller.text.isEmpty) {
+      //TODO:handle exception
+      return;
+    }
+    String url = baseUrl +
+        "search?part=snippet&maxResults=$MAXRESULT&q=${_controller.text}&videoType=any&key=$APK_KEY" +
+        (_NextPagetoken != null ? "&pageToken=$_NextPagetoken" : "");
+
+    final encodeFul = Uri.encodeFull(url);
+
+    final response = await httpClient.get(encodeFul);
+
+    if (response.statusCode == 200) {
+      final data = YoutubeSearchmodel.fromJson(json.decode(response.body));
+      setState(() {
+        print(data.nextPageToken);
+        _NextPagetoken = data.nextPageToken;
+        items += data.items;
+      });
+    }
+  }
 
   Widget _searchWidget() {
     return Row(
@@ -77,7 +108,9 @@ class _YoutubeSearchPageState extends State<YoutubeSearchPage> {
               });
             },
             child: Icon(Icons.arrow_back)),
-        SizedBox(width: 5,),
+        SizedBox(
+          width: 5,
+        ),
         Expanded(
           child: Container(
               height: 45,
@@ -90,17 +123,23 @@ class _YoutubeSearchPageState extends State<YoutubeSearchPage> {
                 controller: _controller,
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  suffixIcon: InkWell(onTap: (){
-                    _loadMockDataFromAssets();
-                  },child: Icon(Icons.search)),
-                    hintText: "search Youtube", border: InputBorder.none),
+                    suffixIcon: InkWell(
+                        onTap: () {
+                          getresult();
+                        },
+                        child: Icon(Icons.search)),
+                    hintText: "search Youtube",
+                    border: InputBorder.none),
               )),
         ),
-        SizedBox(width: 5,),
+        SizedBox(
+          width: 5,
+        ),
         Container(
           width: 38,
           height: 38,
-          decoration: BoxDecoration(color: Colors.black.withOpacity(.1),shape: BoxShape.circle),
+          decoration: BoxDecoration(
+              color: Colors.black.withOpacity(.1), shape: BoxShape.circle),
           child: Icon(Icons.mic),
         ),
       ],
@@ -172,48 +211,105 @@ class _YoutubeSearchPageState extends State<YoutubeSearchPage> {
           BottomNavigationBarItem(icon: Icon(Icons.wysiwyg), label: "Libray"),
         ],
       ),
-      body: _isLoading==true?Center(child: CircularProgressIndicator(),):ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: (){
-              Navigator.pushNamed(context, "/playVideo",arguments: items[index]);
-            },
-            child: Container(
-              height: 280,
-              child: Card(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 200,
-                      width: double.infinity,
-                      color: Colors.grey,
-                      child: Image.network(items[index].snippet.thumbnails.medium.url,fit: BoxFit.cover,),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      "${items[index].snippet.title}",
-                      maxLines: 2,
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      "${items[index].snippet.channelTitle}",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-                    ),
-                  ],
+      body: _controller.text.isEmpty
+          ? Center(
+              child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.search,
+                  size: 50,
+                  color: Colors.black.withOpacity(.7),
                 ),
-              ),
-            ),
-          );
-        },
-      ),
+                Text(
+                  "Search Data",
+                  style: TextStyle(
+                      fontSize: 28, color: Colors.black.withOpacity(.7)),
+                )
+              ],
+            ))
+          : _isLoading == true
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : NotificationListener<ScrollNotification>(
+                  onNotification: (ScrollNotification ScrollNotification) {
+                    if (ScrollNotification is ScrollEndNotification &&
+                        _listscrollController.position.extentAfter == 0) {
+                      nextpageResult();
+                      print("reach to botom");
+                    }
+                    return false;
+                  },
+                  child: ListView.builder(
+                    controller: _listscrollController,
+                    itemCount: _Calculateitemlen(),
+                    itemBuilder: (context, index) {
+                      if (items.length == index) {
+                        return _buildprogressindicator();
+                      } else
+                        return InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/playVideo",
+                                arguments: items[index]);
+                          },
+                          child: Container(
+                            height: 280,
+                            child: Card(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 200,
+                                    width: double.infinity,
+                                    color: Colors.grey,
+                                    child: Image.network(
+                                      items[index]
+                                          .snippet
+                                          .thumbnails
+                                          .medium
+                                          .url,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    "${items[index].snippet.title}",
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    "${items[index].snippet.channelTitle}",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                    },
+                  ),
+                ),
+    );
+  }
+
+  int _Calculateitemlen() {
+    return items.length + 1;
+  }
+
+  Widget _buildprogressindicator() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Center(child: CircularProgressIndicator()),
     );
   }
 }
-
