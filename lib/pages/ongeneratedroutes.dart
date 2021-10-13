@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_3/listview2.dart';
 import 'package:flutter_application_3/pages/Signup_page.dart';
 import 'package:flutter_application_3/pages/Youtube%20search/Model/itemdata.dart';
+import 'package:flutter_application_3/pages/Youtube%20search/Model/youtubesearch_model.dart';
 import 'package:flutter_application_3/pages/Youtube%20search/playvideo.dart';
 import 'package:flutter_application_3/pages/Youtube%20search/youtubesearchpage.dart';
 
@@ -16,7 +17,7 @@ class OnGenerateRoute {
     final args = settings.arguments;
 
     if (settings.name == "/") {
-      return MaterialPageRoute(builder: (_) => YoutubeSearchpage());
+      return MaterialPageRoute(builder: (_) => YoutubeSearchPage());
     } else if (settings.name == "/playVideo") {
       if (args is ItemData) {
         return MaterialPageRoute(
